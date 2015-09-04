@@ -65,11 +65,14 @@ public class TutorialApplication extends Application {
     private void setupBinding() {
         JFXBinder.bind("text").of(textField).to(ATT_FIRSTNAME).of(textAttributeModel);
         JFXBinder.bindInfo("dirty").of(textAttributeModel).to("selected").of(status);
-        JFXBinder.bindInfo("dirty").of(textAttributeModel).to("disabled").of(button, new Closure(null) {
+
+        Closure converter = new Closure(null) {
+            @SuppressWarnings("unused")
             protected Object doCall(boolean dirtyState) {
                 return !dirtyState;
             }
-        });
+        };
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(converter).to("disabled").of(button);
     }
 
     private void addClientSideAction() {

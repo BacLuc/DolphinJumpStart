@@ -70,11 +70,14 @@ public class JumpStart extends Application {
     private void setupBinding() {
         JFXBinder.bind("text").of(textField).to(MODEL_ATTRIBUTE_ID).of(textAttributeModel);
         JFXBinder.bindInfo("dirty").of(textAttributeModel).to("selected").of(status);
-        JFXBinder.bindInfo("dirty").of(textAttributeModel).to("disabled").of(button, new Closure(null) {
+
+        @SuppressWarnings("unused")
+        Closure inverter = new Closure(null) {
             protected Object doCall(boolean dirtyState) {
                 return !dirtyState;
             }
-        });
+        };
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(inverter).to("disabled").of(button);
     }
 
     private void addClientSideAction() {

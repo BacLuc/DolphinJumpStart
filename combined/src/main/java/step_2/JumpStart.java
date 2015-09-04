@@ -27,7 +27,6 @@ import java.util.List;
 
 public class JumpStart extends Application {
 
-    private TextField field;
     private Button button;
     private DefaultInMemoryConfig config = new DefaultInMemoryConfig();
     ClientDolphin clientDolphin = config.getClientDolphin();
@@ -35,6 +34,7 @@ public class JumpStart extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        TextField field;
         Pane root = PaneBuilder.create().children(
                 VBoxBuilder.create().children(
                         field = TextFieldBuilder.create().build(),
