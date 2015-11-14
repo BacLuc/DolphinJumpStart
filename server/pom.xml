@@ -20,5 +20,9 @@
             <groupId>MyFirstDolphin</groupId>
             <artifactId>shared</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
     </dependencies>
 </project>
