@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>step0</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Dolphin Js -->
+    <script data-main="./libs/" src="./libs/require.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>DolphinJumpStart Step0</h1>
+    </div>
+    <div class="jumbotron">
+        <p>Basic app skeleton, set up dolphin client and introducing presentation model with one attribute and bind the value</p>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <input id="instant-update-input" type="text" value="Initial Value">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">
+                <a class="btn btn-default" id="nextStep" title="Click to go to next step" href="step1.html">Next step</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+     require( ['opendolphin'], function(){
+
+        var PM_PERSON = "modelId"
+        var ATT_FIRSTNAME = "attrId"
+
+        // setting up the dolphin
+        var dolphin = opendolphin.dolphin(null, false);
+
+        // make dolphin attribute to do the double binding with
+        var instantUpdateAttributePM = dolphin.attribute(ATT_FIRSTNAME, null, "Initial Value");
+        // make client PM and add the attribute
+        dolphin.presentationModel(PM_PERSON, undefined, instantUpdateAttributePM);
+
+        // get html element to bind against the opendolphin attribute
+        var instantUpdateHtmlInput = document.getElementById("instant-update-input");
+
+        // bind input of textfield to attribute (client change)
+        instantUpdateHtmlInput.oninput = function (event) {
+            instantUpdateAttributePM.setValue(instantUpdateHtmlInput.value);
+        };
+
+        // bind other direction as well (e.g. for rebase(reset on client side) or server-side change)
+        instantUpdateAttributePM.onValueChange(function (event) {
+            instantUpdateHtmlInput.value = event.newValue;
+        });
+     });
+</script>
+
+</body>
+</html>
