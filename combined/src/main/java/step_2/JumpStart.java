@@ -2,6 +2,7 @@ package step_2;
 
 import org.opendolphin.binding.JFXBinder;
 import org.opendolphin.core.PresentationModel;
+import org.opendolphin.core.Tag;
 import org.opendolphin.core.client.ClientAttribute;
 import org.opendolphin.core.client.ClientDolphin;
 import org.opendolphin.core.client.comm.JavaFXUiThreadHandler;
@@ -46,7 +47,7 @@ public class JumpStart extends Application {
         clientDolphin.getClientConnector().setUiThreadHandler(new JavaFXUiThreadHandler());
         config.getServerDolphin().registerDefaultActions();
 
-        PresentationModel input = clientDolphin.presentationModel("input", new ClientAttribute("text"));
+        PresentationModel input = clientDolphin.presentationModel("input", new ClientAttribute("text",null, null, Tag.VALUE));
 
         JFXBinder.bind("text").of(field).to("text").of(input);
 

@@ -1,7 +1,18 @@
 package step_3;
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBoxBuilder;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.PaneBuilder;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.stage.Stage;
 import org.opendolphin.binding.JFXBinder;
 import org.opendolphin.core.PresentationModel;
+import org.opendolphin.core.Tag;
 import org.opendolphin.core.client.ClientAttribute;
 import org.opendolphin.core.client.ClientPresentationModel;
 import org.opendolphin.core.client.comm.JavaFXUiThreadHandler;
@@ -10,13 +21,6 @@ import org.opendolphin.core.comm.Command;
 import org.opendolphin.core.comm.DefaultInMemoryConfig;
 import org.opendolphin.core.comm.NamedCommand;
 import org.opendolphin.core.server.comm.NamedCommandHandler;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -34,7 +38,7 @@ public class JumpStart extends Application {
 
     public JumpStart() {
         config = new DefaultInMemoryConfig();
-        textAttributeModel = config.getClientDolphin().presentationModel(MODEL_ID, new ClientAttribute(MODEL_ATTRIBUTE_ID, ""));
+        textAttributeModel = config.getClientDolphin().presentationModel(MODEL_ID, new ClientAttribute(MODEL_ATTRIBUTE_ID, "", null, Tag.VALUE));
         config.getClientDolphin().getClientConnector().setUiThreadHandler(new JavaFXUiThreadHandler());
         config.getServerDolphin().registerDefaultActions();
     }

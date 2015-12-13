@@ -104,5 +104,6 @@ This has only been a first glance into the way that OpenDolphin operates.
 
 Many more features are available and you may want to check out the
 user guide (http://open-dolphin.org/download/guide/index.html), the
-other demos sources (http://github.com/canoo/open-dolphin/tree/master/subprojects/demo-javafx), or
-the video demos (http://www.youtube.com/user/dierkkoenig).
+other demos sources (http://github.com/canoo/open-dolphin/tree/master/subprojects/demo-javafx), js examples at
+(https://github.com/svene/open-dolphin-examples/ and https://github.com/canoo/open-dolphin/tree/master/subprojects/client-javascript/testsuite/functional)
+or the video demos (http://www.youtube.com/user/dierkkoenig).
