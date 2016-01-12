@@ -10,6 +10,7 @@ import javafx.scene.layout.PaneBuilder;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.stage.Stage;
 import org.opendolphin.core.PresentationModel;
+import org.opendolphin.core.Tag;
 import org.opendolphin.core.client.ClientAttribute;
 import org.opendolphin.core.client.ClientDolphin;
 import org.opendolphin.core.client.ClientPresentationModel;
@@ -28,7 +29,7 @@ public class Application extends javafx.application.Application {
     private Button button;
 
     public Application() {
-        textAttributeModel = clientDolphin.presentationModel(PM_APP, new ClientAttribute(ATT_ATTR_ID, null));
+        textAttributeModel = clientDolphin.presentationModel(PM_APP, new ClientAttribute(ATT_ATTR_ID, null, null, Tag.VALUE));
     }
 
     @Override

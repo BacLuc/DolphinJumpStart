@@ -22,7 +22,7 @@ dependencies {
 task zipJumpstartGradle(type: Zip) {
     archiveName = 'jumpstart-gradle.zip'
     destinationDir = file('dist')
-    excludes = ['classes', 'dist', 'out', '**/build/', '**/target/', 'gradle-app.setting', 'atlassian*', '**/*.i*']
+    excludes = ['classes', 'dist', 'out', '**/build/', '**/target/', 'gradle-app.setting', 'atlassian*', '**/*.i*', '.gradle']
     from '.'
     rename('(.*)-template.(.*)', '$1.$2')
 }
@@ -31,7 +31,7 @@ task zipJumpstartMaven(type: Zip) {
     from '.'
     archiveName = 'jumpstart-maven.zip'
     destinationDir = file('dist')
-    excludes = ['classes', 'dist', 'out', '**/build/', '**/target/', 'gradle-app.setting', 'atlassian*', '**/*.i*']
+    excludes = ['classes', 'dist', 'out', '**/build/', '**/target/', 'gradle-app.setting', 'atlassian*', '**/*.i*', '.gradle']
     rename('(.*)-template.(.*)', '$1.$2')
 
 }

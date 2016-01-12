@@ -2,6 +2,7 @@ package step_5;
 
 import org.opendolphin.binding.JFXBinder;
 import org.opendolphin.core.PresentationModel;
+import org.opendolphin.core.Tag;
 import org.opendolphin.core.client.ClientAttribute;
 import org.opendolphin.core.client.ClientDolphin;
 import org.opendolphin.core.client.ClientPresentationModel;
@@ -35,7 +36,7 @@ public class TutorialApplication extends Application {
 
 
     public TutorialApplication() {
-        textAttributeModel = clientDolphin.presentationModel(PM_PERSON, new ClientAttribute(ATT_FIRSTNAME, ""));
+        textAttributeModel = clientDolphin.presentationModel(PM_PERSON, new ClientAttribute(ATT_FIRSTNAME, "", null, Tag.VALUE));
     }
 
     @Override
@@ -65,11 +66,14 @@ public class TutorialApplication extends Application {
     private void setupBinding() {
         JFXBinder.bind("text").of(textField).to(ATT_FIRSTNAME).of(textAttributeModel);
         JFXBinder.bindInfo("dirty").of(textAttributeModel).to("selected").of(status);
-        JFXBinder.bindInfo("dirty").of(textAttributeModel).to("disabled").of(button, new Closure(null) {
+
+        Closure converter = new Closure(null) {
+            @SuppressWarnings("unused")
             protected Object doCall(boolean dirtyState) {
                 return !dirtyState;
             }
-        });
+        };
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(converter).to("disabled").of(button);
     }
 
     private void addClientSideAction() {

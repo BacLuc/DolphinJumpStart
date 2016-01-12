@@ -1,6 +1,6 @@
 package template.servlet;
 
-import org.opendolphin.core.server.ServerDolphin;
+import org.opendolphin.core.server.DefaultServerDolphin;
 import org.opendolphin.server.adapter.DolphinServlet;
 import template.ApplicationDirector;
 
@@ -9,7 +9,7 @@ import template.ApplicationDirector;
  */
 public class ApplicationServlet extends DolphinServlet{
     @Override
-    protected void registerApplicationActions(ServerDolphin serverDolphin) {
+    protected void registerApplicationActions(DefaultServerDolphin serverDolphin) {
         serverDolphin.register(new ApplicationDirector());
     }
 }

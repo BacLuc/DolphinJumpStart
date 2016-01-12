@@ -9,7 +9,7 @@ import org.opendolphin.core.client.comm.UiThreadHandler;
 import org.opendolphin.core.comm.DefaultInMemoryConfig;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -30,7 +30,7 @@ public class TutorialTests {
             }
         });
         LogConfig.noLogs(); // Do not log any dolphin messages.
-        config.getClientDolphin().presentationModel(PM_PERSON, Arrays.asList(ATT_FIRSTNAME));
+        config.getClientDolphin().presentationModel(PM_PERSON, Collections.singletonList(ATT_FIRSTNAME));
     }
 
     private void setupConfig() {

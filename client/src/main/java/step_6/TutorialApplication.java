@@ -2,6 +2,7 @@ package step_6;
 
 import org.opendolphin.binding.JFXBinder;
 import org.opendolphin.core.PresentationModel;
+import org.opendolphin.core.Tag;
 import org.opendolphin.core.client.ClientAttribute;
 import org.opendolphin.core.client.ClientDolphin;
 import org.opendolphin.core.client.ClientPresentationModel;
@@ -41,7 +42,7 @@ public class TutorialApplication extends Application {
 
 
     public TutorialApplication() {
-        textAttributeModel = clientDolphin.presentationModel(PM_PERSON, new ClientAttribute(ATT_FIRSTNAME, ""));
+        textAttributeModel = clientDolphin.presentationModel(PM_PERSON, new ClientAttribute(ATT_FIRSTNAME, "", null, Tag.VALUE));
     }
 
     @Override
@@ -69,21 +70,15 @@ public class TutorialApplication extends Application {
         JFXBinder.bind("text").of(textField).to(ATT_FIRSTNAME).of(textAttributeModel);
         JFXBinder.bind(ATT_FIRSTNAME).of(textAttributeModel).to("text").of(textField);
 
-        JFXBinder.bindInfo("dirty").of(textAttributeModel).to("style").of(textField, new Closure(null) {
-            public String call(Boolean dirty) {
-                if (dirty) {
-                    textField.getStyleClass().add("dirty");
-                } else {
-                    textField.getStyleClass().remove("dirty");
-                }
-                return "";
-            }
-        });
+        Closure dirtyStyle = new DirtyStyle(textField);
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(dirtyStyle).to("style").of(textField);
+
         Inverter inv = new Inverter();
-        JFXBinder.bindInfo("dirty").of(textAttributeModel).to("disabled").of(button, inv);
-        JFXBinder.bindInfo("dirty").of(textAttributeModel).to("disabled").of(reset, inv);
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(inv).to("disabled").of(button);
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(inv).to("disabled").of(reset);
     }
 
+    @SuppressWarnings("unchecked")
     private void addClientSideAction() {
         textField.setOnAction(new RebaseHandler(textAttributeModel));
         button.setOnAction(new RebaseHandler(textAttributeModel));
@@ -106,11 +101,31 @@ public class TutorialApplication extends Application {
         });
     }
 
+    private static class DirtyStyle extends Closure {
+        private TextField textField;
+
+        public DirtyStyle(TextField textField) {
+            super(null);
+            this.textField = textField;
+        }
+
+        @SuppressWarnings("unused")
+        public String call(Boolean dirty) {
+            if (dirty) {
+                textField.getStyleClass().add("dirty");
+            } else {
+                textField.getStyleClass().remove("dirty");
+            }
+            return "";
+        }
+    }
+
     private static class Inverter extends Closure {
         public Inverter() {
             super(null);
         }
 
+        @SuppressWarnings("unused")
         protected Object call(Boolean dirtyState) {
             return !dirtyState;
         }
