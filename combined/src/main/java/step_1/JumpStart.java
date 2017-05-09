@@ -23,10 +23,10 @@ public class JumpStart extends Application {
     public void start(Stage primaryStage) throws Exception {
         
         Pane root = new Pane(
-                        new VBox(
-                                new TextField()
-                                , new Button("click me")
-                        )
+                new VBox(
+                        field = new TextField()
+                        ,button = new Button("click me")
+                )
         );
 
         addActions();
