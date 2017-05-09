@@ -7,3 +7,4 @@ build
 dist
 out
 gradle-app.setting
+*nbactions.xml
