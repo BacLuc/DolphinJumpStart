@@ -1,5 +1,6 @@
 build
 .idea
+.idea/*
 *.ipr
 *.iws
 *.iml
@@ -9,5 +10,4 @@ out
 gradle-app.setting
 */target/
 
-*nbactions.xml
 *nbactions.xml
