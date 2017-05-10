@@ -25,6 +25,7 @@ import javafx.scene.layout.PaneBuilder;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -38,6 +39,10 @@ public class TutorialApplication extends Application {
     private TextField textField;
     private Button button;
     private Button reset;
+
+    private TextField textField2;
+    private Button button2;
+    private Button reset2;
     private PresentationModel textAttributeModel;
 
 
@@ -55,6 +60,14 @@ public class TutorialApplication extends Application {
                 ).build()
         ).build();
 
+        Pane root2 = PaneBuilder.create().children(
+                VBoxBuilder.create().id("content").children(
+                        textField2 = TextFieldBuilder.create().id("firstname").build(),
+                        button2 = ButtonBuilder.create().text("save").build(),
+                        reset2 = ButtonBuilder.create().text("reset").build()
+                ).build()
+        ).build();
+
         addClientSideAction();
         setupBinding();
 
@@ -63,7 +76,15 @@ public class TutorialApplication extends Application {
         stage.setTitle(getClass().getName());
         scene.getStylesheets().add("/step_6/tutorial.css");
 
+        Stage stage2 = new Stage();
+        Scene scene2 = new Scene(root2,300,150);
+
+        stage2.setScene(scene2);
+        stage2.setTitle(getClass().getName()+"2");
+        scene2.getStylesheets().add("/step_6/tutorial.css");
+
         stage.show();
+        stage2.show();
     }
 
     private void setupBinding() {
@@ -76,12 +97,25 @@ public class TutorialApplication extends Application {
         Inverter inv = new Inverter();
         JFXBinder.bindInfo("dirty").of(textAttributeModel).using(inv).to("disabled").of(button);
         JFXBinder.bindInfo("dirty").of(textAttributeModel).using(inv).to("disabled").of(reset);
+
+
+        JFXBinder.bind("text").of(textField2).to(ATT_FIRSTNAME).of(textAttributeModel);
+        JFXBinder.bind(ATT_FIRSTNAME).of(textAttributeModel).to("text").of(textField2);
+
+        Closure dirtyStyle2 = new DirtyStyle(textField2);
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(dirtyStyle2).to("style").of(textField2);
+
+
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(inv).to("disabled").of(button2);
+        JFXBinder.bindInfo("dirty").of(textAttributeModel).using(inv).to("disabled").of(reset2);
     }
 
     @SuppressWarnings("unchecked")
     private void addClientSideAction() {
         textField.setOnAction(new RebaseHandler(textAttributeModel));
         button.setOnAction(new RebaseHandler(textAttributeModel));
+        textField2.setOnAction(new RebaseHandler(textAttributeModel));
+        button2.setOnAction(new RebaseHandler(textAttributeModel));
         final Transition fadeIn = RotateTransitionBuilder.create().node(textField).toAngle(0).duration(Duration.millis(200)).build();
         final Transition fadeOut = RotateTransitionBuilder.create().node(textField).fromAngle(-3).interpolator(Interpolator.LINEAR).
                 toAngle(3).cycleCount(3).duration(Duration.millis(100)).

@@ -91,7 +91,6 @@
                 <version>2.1</version>
                 <scope>system</scope>
                 <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-                <systemPath>${java.home}/jre/lib/ext/jfxrt.jar</systemPath>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
