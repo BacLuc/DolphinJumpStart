@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DolphinJumpstart.iml" filepath="$PROJECT_DIR$/.idea/modules/DolphinJumpstart.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyFirstDolphin.iml" filepath="$PROJECT_DIR$/MyFirstDolphin.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
       <module fileurl="file://$PROJECT_DIR$/combined/combined.iml" filepath="$PROJECT_DIR$/combined/combined.iml" />
@@ -11,4 +12,3 @@
     </modules>
   </component>
 </project>
-
