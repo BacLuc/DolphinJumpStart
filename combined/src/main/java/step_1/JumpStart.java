@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFieldBuilder;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.PaneBuilder;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.stage.Stage;
 
@@ -21,13 +20,13 @@ public class JumpStart extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
-        Pane root = new Pane(
-                new VBox(
-                        field = new TextField()
-                        ,button = new Button("click me")
-                )
-        );
+        Pane root = PaneBuilder.create().children(
+                VBoxBuilder.create().children(
+                        field = TextFieldBuilder.create().build(),
+                        button= ButtonBuilder.create()
+                                     .text("click me")
+                                     .build()).build()
+        ).build();
 
         addActions();
 
